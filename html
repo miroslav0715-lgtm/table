@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Карточка профиля | CSS3</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (бесплатный) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Сброс стилей и базовые настройки */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(145deg, #1e3c72 0%, #2a5298 100%);
+      /* Градиентный фон */
+      padding: 1rem;
+    }
+
+    /* Карточка профиля */
+    .profile-card {
+      max-width: 380px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-radius: 30px;
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.3), 0 10px 15px rgba(0, 0, 0, 0.2);
+      /* тень */
+      padding: 2rem 1.8rem;
+      transition: all 0.3s ease;
+      /* Плавные переходы */
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Псевдоэлемент для декоративной линии */
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .profile-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Анимация при наведении на карточку */
+    .profile-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 35px 60px rgba(0, 0, 0, 0.4), 0 15px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Аватар */
+    .avatar {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+      font-weight: 600;
+      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.5), 0 0 0 5px rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .avatar:hover {
+      transform: scale(1.05) rotate(3deg);
+      box-shadow: 0 20px 35px rgba(102, 126, 234, 0.7), 0 0 0 6px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Информация */
+    .card-header {
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #1e2a5e;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 0.3rem;
+    }
+
+    .card-header .title {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #4a5568;
+      background: rgba(102, 126, 234, 0.1);
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 50px;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(102, 126, 234, 0.3);
+    }
+
+    .description {
+      text-align: center;
+      color: #2d3748;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      padding: 0 0.5rem;
+      font-weight: 300;
+      position: relative;
+    }
+
+    /* Декоративная линия через псевдоэлемент */
+    .description::before,
+    .description::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #667eea, transparent);
+      margin: 0.8rem auto;
+    }
+
+    .description::before {
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+    }
+
+    .description::after {
+      margin-top: 0.8rem;
+      margin-bottom: 0;
+    }
+
+    /* Кнопки действий */
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      background: white;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.6);
+      background: linear-gradient(135deg, #5a6fd8 0%, #6a4393 100%);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #4a5568;
+      border: 1px solid #cbd5e0;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px) scale(1.05);
+      background: #f7fafc;
+      border-color: #667eea;
+      color: #1e2a5e;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Социальные сети */
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .social li a {
+      color: #4a5568;
+      font-size: 1.8rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .social li a:hover {
+      transform: translateY(-5px) scale(1.2);
+      color: #667eea;
+      text-shadow: 0 10px 15px rgba(102, 126, 234, 0.5);
+    }
+
+    /* Адаптивность (мобильные устройства) */
+    @media (max-width: 600px) {
+      .profile-card {
+        max-width: 100%;
+        padding: 1.5rem;
+      }
+
+      .actions {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .social {
+        gap: 1.2rem;
+      }
+
+      .social li a {
+        font-size: 2rem;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+      }
+
+      .card-header h2 {
+        font-size: 1.7rem;
+      }
+    }
+
+    /* Дополнительная анимация для тени текста (пример) */
+    @keyframes subtleGlow {
+      0% { text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+      50% { text-shadow: 3px 3px 8px rgba(102,126,234,0.4); }
+      100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+    }
+
+    .card-header h2 {
+      animation: subtleGlow 4s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="profile-card">
+      <!-- Аватар (инициалы) -->
+      <div class="avatar" aria-label="Аватар пользователя">ИИ</div>
+
+      <!-- Заголовок с именем и должностью -->
+      <header class="card-header">
+        <h2>Иван Иванов</h2>
+        <div class="title">Frontend-разработчик</div>
+      </header>
+
+      <!-- Описание (с псевдоэлементами) -->
+      <p class="description">
+        Увлекаюсь современным CSS3 и JavaScript. Создаю красивые и отзывчивые интерфейсы. Люблю экспериментировать с анимациями.
+      </p>
+
+      <!-- Кнопки действий -->
+      <div class="actions">
+        <button class="btn btn-primary">Подписаться</button>
+        <button class="btn btn-secondary">Сообщение</button>
+      </div>
+
+      <!-- Социальные сети (иконки Font Awesome) -->
+      <footer>
+        <ul class="social">
+          <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a></li>
+        </ul>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
